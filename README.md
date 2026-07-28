@@ -43,3 +43,8 @@ Esta implementación se ha centrado en mejorar el flujo principal de estudio tan
 - Se redujo la intensidad de los bordes y las sombras.
 - Se unificó el color principal de botones, iconos y estados activos.
 - Se mejoraron los espaciados, la alineación y el ancho máximo del contenido.
+
+## Qué haría con más tiempo
+
+-En cuanto al diseño, consolidaría un sistema visual común para toda la aplicación, definiendo colores, espaciados, tipografías, bordes, sombras y estados de los componentes.
+-Realizaría pruebas en dispositivos móviles reales y una revisión de accesibilidad, prestando especial atención al contraste, la navegación por teclado, los estados de foco y las preferencias de movimiento reducido.
