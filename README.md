@@ -46,5 +46,5 @@ Esta implementación se ha centrado en mejorar el flujo principal de estudio tan
 
 ## Qué haría con más tiempo
 
-- En cuanto al diseño, consolidaría un sistema visual común para toda la aplicación, definiendo colores, espaciados, tipografías, bordes, sombras y estados de los componentes.
+- En cuanto al diseño, consolidaría un sistema visual común para toda la aplicación, definiendo colores, espaciados, tipografías, bordes, sombras y estados de los componentes. 
 - Realizaría pruebas en dispositivos móviles reales y una revisión de accesibilidad, prestando especial atención al contraste, la navegación por teclado, los estados de foco y las preferencias de movimiento reducido.
