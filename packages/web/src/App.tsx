@@ -4,20 +4,30 @@ import { Chat } from "./components/Chat.tsx";
 import { Sidebar } from "./components/Sidebar.tsx";
 
 export function App() {
-  const [selectedArtifactId, setSelectedArtifactId] = useState<string | null>(null);
+  const [selectedArtifactId, setSelectedArtifactId] = useState<string | null>(
+    null,
+  );
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div
-      className="grid h-screen min-h-screen overflow-hidden bg-slate-950 text-slate-100"
-      style={{
-        gridTemplateColumns: selectedArtifactId === null
-          ? "340px minmax(0, 1fr)"
-          : "340px minmax(0, 1fr) 420px"
-      }}
+      className="grid h-dvh min-h-dvh grid-cols-1 overflow-hidden bg-[#F7F6FF] md:grid-cols-[340px_minmax(0,1fr)]"
     >
-      <Sidebar selectedArtifactId={selectedArtifactId} onSelectArtifact={setSelectedArtifactId} />
-      {selectedArtifactId !== null && <ArtifactWorkspace artifactId={selectedArtifactId} />}
-      <Chat />
+      <Sidebar
+        selectedArtifactId={selectedArtifactId}
+        onSelectArtifact={setSelectedArtifactId}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+
+      {selectedArtifactId === null ? (
+        <Chat onOpenSidebar={() => setIsSidebarOpen(true)} />
+      ) : (
+        <ArtifactWorkspace
+          artifactId={selectedArtifactId}
+          onCloseArtifact={() => setSelectedArtifactId(null)}
+        />
+      )}
     </div>
   );
 }
