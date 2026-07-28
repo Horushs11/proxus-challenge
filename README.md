@@ -1,98 +1,45 @@
-# Proxus Product Engineer Challenge
+## Mejoras de UI/UX realizadas
 
-Template de inicio para explorar un caso fullstack + AI inspirado en Proxus: un tutor académico que usa materiales PDF, crea artefactos de estudio y permite resolver quizzes/tests desde una UI web.
+Esta implementación se ha centrado en mejorar el flujo principal de estudio tanto en escritorio como en dispositivos móviles.
 
-El objetivo del repo no es ser una app cerrada, sino una base razonable para que una persona candidata pueda demostrar criterio de producto, arquitectura fullstack y uso pragmático de AI.
+### Diseño responsive
 
-## Stack
+- Se añadió un diseño de una sola columna para dispositivos móviles.
+- En escritorio se mantiene una estructura de dos columnas:
+  - Sidebar fijo.
+  - Área principal flexible.
+- El sidebar se convierte en un menú lateral superpuesto en móvil.
 
-- Monorepo con `pnpm` workspaces.
-- Runtime backend: Node.js.
-- Backend: TypeScript, Effect v4 beta, Effect HTTP API, Gemini.
-- Frontend: React 19, Vite, Tailwind v4, `@effect/atom-react`.
-- Contratos compartidos: `packages/shared`.
-- Persistencia local simple: filesystem bajo `packages/server/.data` (`.data` está ignorado por git).
-- PDFs: Poppler (`pdfinfo`, `pdftoppm`) para renderizar páginas que Gemini puede analizar como imágenes.
+### Experiencia del chat
 
-## Estructura
+- Se rediseñó el chat para mejorar la jerarquía visual entre los mensajes del usuario y del tutor.
+- Se añadió un textarea que aumenta su altura automáticamente hasta un límite máximo.
+- El botón de envío se integró dentro del campo de escritura.
+- Se añadió soporte para:
+  - `Enter` para enviar el mensaje.
+  - `Shift + Enter` para crear una nueva línea.
+- Se añadió un indicador de carga mientras el tutor genera una respuesta.
+- Se implementó scroll automático al recibir nuevos mensajes.
+- La zona de mensajes tiene scroll independiente, manteniendo siempre visible el campo de escritura.
+- El botón para limpiar la conversación solo aparece cuando existen mensajes.
+- Se ocultaron las llamadas y resultados internos de las herramientas para no mostrar información técnica innecesaria al usuario.
+- Se añadió una animación suave al aparecer nuevos mensajes.
 
-```txt
-packages/
-  shared/      # Schemas y contratos HTTP compartidos entre server y web
-  server/      # Backend Node + Effect, tutor agent, materiales y artifacts
-  web/         # App React + proxy /api hacia el backend
-  ai-google/   # Integración local con Gemini para Effect AI
+### Navegación entre chat y artifacts
 
-docs/
-  getting-started.md  # Cómo orientarse en la repo y añadir PDFs locales
-  architecture.md     # Mapa de arquitectura actual
-  development.md      # Setup, scripts y troubleshooting
-  effect-primer.md    # Lectura rápida de Effect para este repo
-  ai-agent.md         # Cómo funciona el tutor/agent harness
-  api.md              # Endpoints principales
-  testing.md          # Checks y QA manual
-  data.md             # Datos locales y storage
-  resources.md        # Referencias externas sobre Effect, AI agents y evals
-```
+- Se modificó la estructura para evitar que el chat y el workspace de artifacts aparezcan comprimidos al mismo tiempo.
+- El área principal muestra de forma condicional:
+  - El chat del tutor.
+  - Una nota, quiz o test seleccionado.
+- Se añadió un botón para volver al chat desde un artifact.
+- Se mejoró el diseño visual de los quizzes.
+- Se adaptó el color de los controles de selección a la paleta principal de la aplicación.
 
-## Quickstart
+### Sistema visual
 
-Requisitos:
-
-- Node.js 20+.
-- pnpm instalado.
-- Poppler instalado (`pdfinfo` y `pdftoppm`) si quieres usar PDFs.
-- Una API key de Google Gemini para probar el agente AI.
-
-Instala dependencias:
-
-```bash
-pnpm install
-```
-
-Configura entorno:
-
-```bash
-cp .env.example .env
-# edita GOOGLE_GENERATIVE_AI_API_KEY
-```
-
-Arranca backend + frontend:
-
-```bash
-pnpm run dev
-```
-
-URLs por defecto:
-
-- Web: <http://localhost:5173>
-- API: <http://localhost:3000>
-- Docs OpenAPI/Scalar: <http://localhost:3000/docs>
-- OpenAPI JSON: <http://localhost:3000/openapi.json>
-
-## Comandos útiles
-
-```bash
-pnpm run typecheck
-pnpm --filter @proxus/web run build
-pnpm --filter @proxus/server run agent:tutor "list my uploaded materials"
-pnpm --filter @proxus/server run agent:tutor "Crea un quiz corto de una pregunta"
-```
-
-## Por dónde empezar si estás evaluando el proyecto
-
-1. Lee [`CHALLENGE.md`](./CHALLENGE.md) para entender el contexto y cómo enfocar una mejora.
-2. Lee [`docs/getting-started.md`](./docs/getting-started.md) para orientarte y añadir PDFs locales.
-3. Lee [`docs/architecture.md`](./docs/architecture.md) para ubicarte en paquetes y capas.
-4. Si Effect no te resulta familiar, lee [`docs/effect-primer.md`](./docs/effect-primer.md) y [`docs/resources.md`](./docs/resources.md).
-5. Ejecuta `pnpm run dev` y prueba el flujo:
-   - lista materiales,
-   - pide al tutor crear un quiz,
-   - abre el artefacto en el workspace,
-   - resuélvelo y revisa correcciones.
-6. Si necesitas más detalle sobre storage local, sigue [`docs/data.md`](./docs/data.md); no subas `.data`.
-7. Antes de entregar cambios, ejecuta [`docs/testing.md`](./docs/testing.md).
-
-## Nota sobre runtime y package manager
-
-El monorepo se instala y se orquesta con `pnpm`. El server corre en Node usando `tsx` para ejecutar TypeScript en desarrollo; la web corre con Vite.
+- Se creó una interfaz clara con un fondo lavanda suave.
+- Las respuestas del tutor utilizan un fondo blanco para facilitar la lectura.
+- Los mensajes del usuario utilizan un fondo morado claro para diferenciarlos.
+- Se redujo la intensidad de los bordes y las sombras.
+- Se unificó el color principal de botones, iconos y estados activos.
+- Se mejoraron los espaciados, la alineación y el ancho máximo del contenido.
